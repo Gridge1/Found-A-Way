@@ -1,0 +1,469 @@
+{
+  "meta": {
+    "lastUpdated": "2025-05-25",
+    "notes": "UK departure airports with terminal, lounge, and facility detail. Destination airport data served via AeroDataBox API in v2+."
+  },
+  "airports": {
+    "LHR": {
+      "name": "London Heathrow Airport",
+      "city": "London",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "timezone": "Europe/London",
+      "type": "departure",
+      "terminals": [
+        {
+          "name": "Terminal 2 (The Queen's Terminal)",
+          "airlines": ["United Airlines", "Air Canada", "Lufthansa", "Swiss", "Air New Zealand", "Singapore Airlines", "Thai Airways", "Scandinavian Airlines", "TAP Air Portugal", "Aer Lingus", "and most Star Alliance carriers"]
+        },
+        {
+          "name": "Terminal 3",
+          "airlines": ["American Airlines", "Qantas", "Cathay Pacific", "Finnair", "Royal Jordanian", "Malaysia Airlines", "Delta", "Virgin Atlantic", "and other oneworld/SkyTeam carriers"]
+        },
+        {
+          "name": "Terminal 4",
+          "airlines": ["KLM", "Air France (some)", "Saudi Arabian Airlines", "Korean Air", "Malaysia (some)", "Garuda Indonesia"]
+        },
+        {
+          "name": "Terminal 5",
+          "airlines": ["British Airways (exclusively)", "Iberia", "Vueling"]
+        }
+      ],
+      "lounges": [
+        { "name": "No1 Lounge", "terminal": "T2", "access": ["Priority Pass", "DragonPass", "pay on door"] },
+        { "name": "Aspire Lounge", "terminal": "T3", "access": ["Priority Pass", "DragonPass", "Lounge Pass"] },
+        { "name": "No1 Lounge", "terminal": "T3", "access": ["Priority Pass", "DragonPass", "pay on door"] },
+        { "name": "Plaza Premium Lounge", "terminal": "T2", "access": ["Priority Pass", "DragonPass"] },
+        { "name": "Plaza Premium Lounge", "terminal": "T4", "access": ["Priority Pass", "DragonPass"] },
+        { "name": "British Airways Galleries", "terminal": "T5", "access": ["BA Business/First class", "BA Gold/Silver Executive Club", "oneworld status"] },
+        { "name": "Qantas Business Lounge", "terminal": "T3", "access": ["Qantas Business/First class", "oneworld Sapphire/Emerald"] }
+      ],
+      "facilities": {
+        "wifi": true,
+        "wifiNotes": "Free 45 minutes then paid. Better to use phone hotspot for longer sessions.",
+        "showers": true,
+        "showersNotes": "Available in most lounges. Day rooms available at T2 Yotel.",
+        "food": "Extensive across all terminals. T5 has the best variety. Most major chains plus independent restaurants.",
+        "pharmacy": true,
+        "currencyExchange": true,
+        "leftLuggage": true,
+        "hotelOnsite": true,
+        "hotelNotes": "Sofitel in T5, Yotel pods in T2. Several hotels within 5 mins on the Heathrow Express."
+      },
+      "transit": {
+        "minimumMinutes": 60,
+        "recommendedMinutes": 90,
+        "interTerminalTransfer": true,
+        "interTerminalNotes": "T4 and T5 are served by the free Heathrow Express (4 min) and Heathrow Connect. T2/T3 are connected by a walkway. T4↔T2/3/5 requires taking a train — allow at least 20–30 minutes for the transfer alone.",
+        "notes": "T5 security is often fastest. T2/T3 security can have very long queues — arrive early. If connecting between terminals on a tight layover, alert airport staff."
+      },
+      "cityLink": {
+        "elizabethLine": "35–40 min to central London. Most convenient option. £12–15.",
+        "heathrowExpress": "15 min to Paddington. Fastest. £25–37 (book online for cheaper).",
+        "taxi": "30–60 min depending on traffic. Around £50–70 to central London.",
+        "bus": "National Express and other coaches from all terminals. Cheaper but slow."
+      },
+      "tip": "Terminal 5 is Heathrow's flagship — cleanest, least crowded, and has the best food. If flying BA, it's worth it. Check your terminal carefully before arriving as they are not connected landside."
+    },
+    "LGW": {
+      "name": "London Gatwick Airport",
+      "city": "London",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "timezone": "Europe/London",
+      "type": "departure",
+      "terminals": [
+        {
+          "name": "North Terminal",
+          "airlines": ["easyJet (most routes)", "Emirates", "TUI (some)", "Norwegian", "Wizz Air (some)", "British Airways (some)", "Vueling"]
+        },
+        {
+          "name": "South Terminal",
+          "airlines": ["easyJet (some routes)", "Ryanair", "Jet2", "TUI (main)", "United", "American Airlines", "Delta", "Iberia", "British Airways (some transatlantic)"]
+        }
+      ],
+      "lounges": [
+        { "name": "No1 Lounge", "terminal": "North", "access": ["Priority Pass", "DragonPass", "Lounge Pass", "pay on door"] },
+        { "name": "Aspire Lounge", "terminal": "South", "access": ["Priority Pass", "DragonPass", "Lounge Pass"] },
+        { "name": "No1 Lounge", "terminal": "South", "access": ["Priority Pass", "DragonPass", "pay on door"] },
+        { "name": "British Airways Executive Club Lounge", "terminal": "North", "access": ["BA Gold/Silver", "oneworld status"] }
+      ],
+      "facilities": {
+        "wifi": true,
+        "wifiNotes": "Free wifi throughout both terminals.",
+        "showers": true,
+        "showersNotes": "Available in the No1 Lounges.",
+        "food": "Good range in both terminals. North Terminal generally better variety.",
+        "pharmacy": true,
+        "currencyExchange": true,
+        "leftLuggage": true,
+        "hotelOnsite": true,
+        "hotelNotes": "Bloc Hotel attached to South Terminal. Several hotels a short shuttle away."
+      },
+      "transit": {
+        "minimumMinutes": 45,
+        "recommendedMinutes": 75,
+        "interTerminalTransfer": true,
+        "interTerminalNotes": "Monorail connects North and South terminals in 3–4 minutes. Runs 24/7.",
+        "notes": "The monorail is free and quick, but check your terminal carefully. North Terminal security is generally well-managed. South Terminal can get congested in summer."
+      },
+      "cityLink": {
+        "gatwickExpress": "30 min to London Bridge / Victoria. Around £15–20 (book online).",
+        "thameslink": "30–45 min to London Bridge, Farringdon, St Pancras. Often cheaper than Gatwick Express.",
+        "taxi": "40–75 min to central London. Around £60–80.",
+        "bus": "easyBus and National Express coaches available. Much cheaper, takes 60–90 min."
+      },
+      "tip": "The monorail between terminals runs all night and is very reliable. North Terminal is slightly nicer. Emirates check-in at North Terminal is usually well-organised with a shorter security queue than budget carrier check-ins."
+    },
+    "STN": {
+      "name": "London Stansted Airport",
+      "city": "London (Essex)",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "timezone": "Europe/London",
+      "type": "departure",
+      "terminals": [
+        {
+          "name": "Main Terminal (single terminal)",
+          "airlines": ["Ryanair (dominant)", "easyJet", "Jet2", "Wizz Air", "TUI", "Flybe"]
+        }
+      ],
+      "lounges": [
+        { "name": "Escape Lounge", "terminal": "Main", "access": ["Priority Pass", "DragonPass", "pay on door ~£35"] }
+      ],
+      "facilities": {
+        "wifi": true,
+        "wifiNotes": "Free wifi available.",
+        "showers": false,
+        "showersNotes": "Only available in the lounge.",
+        "food": "Budget airport standard — chains like Costa, Burger King, Wagamama. Nothing exceptional.",
+        "pharmacy": true,
+        "currencyExchange": true,
+        "leftLuggage": true,
+        "hotelOnsite": false,
+        "hotelNotes": "Radisson Blu and other hotels nearby, free shuttle from terminal."
+      },
+      "transit": {
+        "minimumMinutes": 45,
+        "recommendedMinutes": 60,
+        "interTerminalTransfer": false,
+        "interTerminalNotes": "Single terminal — no inter-terminal transfer needed.",
+        "notes": "Stansted is compact but can get very crowded during peak budget airline departure times. Security queues can be slow in the morning. Allow extra time."
+      },
+      "cityLink": {
+        "stanstedExpress": "47 min to Liverpool Street. £25–35 (book in advance for best price).",
+        "taxi": "60–90 min to central London. £70–100.",
+        "bus": "National Express and easyBus to various London stops. Much cheaper, takes 75–100 min."
+      },
+      "tip": "Stansted is a pure budget airport — expect a long walk to gates and basic facilities. If you're flying Ryanair, double-check bag dimensions carefully before you go, as fines are enforced strictly here."
+    },
+    "LTN": {
+      "name": "London Luton Airport",
+      "city": "London (Bedfordshire)",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "timezone": "Europe/London",
+      "type": "departure",
+      "terminals": [
+        {
+          "name": "Main Terminal (single terminal)",
+          "airlines": ["Wizz Air (dominant)", "easyJet", "Ryanair", "TUI", "Jet2"]
+        }
+      ],
+      "lounges": [
+        { "name": "No1 Lounge", "terminal": "Main", "access": ["Priority Pass", "DragonPass", "Lounge Pass", "pay on door"] }
+      ],
+      "facilities": {
+        "wifi": true,
+        "wifiNotes": "Free wifi available.",
+        "showers": false,
+        "showersNotes": "Shower available in the No1 Lounge only.",
+        "food": "Limited. Basic chains — Wetherspoon, Costa, Pret. Not much variety.",
+        "pharmacy": true,
+        "currencyExchange": true,
+        "leftLuggage": true,
+        "hotelOnsite": false,
+        "hotelNotes": "Holiday Inn Luton nearby, free shuttle from terminal."
+      },
+      "transit": {
+        "minimumMinutes": 45,
+        "recommendedMinutes": 65,
+        "interTerminalTransfer": false,
+        "interTerminalNotes": "Single terminal.",
+        "notes": "Luton is the smallest of the London airports. Can feel cramped. The 10-minute shuttle bus to the train station adds time to your journey."
+      },
+      "cityLink": {
+        "trainAndShuttle": "10 min shuttle to Luton Airport Parkway station, then 22–40 min train to St Pancras. Thameslink. Total ~50 min. Around £15–18.",
+        "taxi": "45–75 min to central London. Around £55–70.",
+        "bus": "National Express, Green Line coaches. Cheaper but slow — 60–90 min."
+      },
+      "tip": "The shuttle bus to the train station runs frequently but costs extra. Budget at least 25 minutes from terminal to being seated on the train. Security can be slow — don't cut it fine."
+    },
+    "LCY": {
+      "name": "London City Airport",
+      "city": "London",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "timezone": "Europe/London",
+      "type": "departure",
+      "terminals": [
+        {
+          "name": "Main Terminal (single terminal)",
+          "airlines": ["British Airways", "Aer Lingus", "KLM", "Lufthansa (some)", "Swiss", "Luxair", "SAS", "SWISS", "Loganair"]
+        }
+      ],
+      "lounges": [
+        { "name": "No1 Lounge", "terminal": "Main", "access": ["Priority Pass", "DragonPass", "pay on door"] }
+      ],
+      "facilities": {
+        "wifi": true,
+        "wifiNotes": "Free wifi throughout.",
+        "showers": false,
+        "showersNotes": "No showers available.",
+        "food": "Small but decent selection. Gordon Ramsay Bar & Grill, Travelex, a café.",
+        "pharmacy": false,
+        "currencyExchange": true,
+        "leftLuggage": false,
+        "hotelOnsite": false
+      },
+      "transit": {
+        "minimumMinutes": 30,
+        "recommendedMinutes": 45,
+        "interTerminalTransfer": false,
+        "interTerminalNotes": "Single compact terminal — fastest security of any London airport.",
+        "notes": "London City's biggest advantage is its speed — security queues rarely exceed 10 minutes and check-in closes later than most airports. Perfect for business trips. Limited long-haul options."
+      },
+      "cityLink": {
+        "elizabethLine": "Direct from London City Airport station. 10 min to Canary Wharf, 20 min to Liverpool Street, 40 min to Heathrow. Free with Oyster.",
+        "dlr": "DLR also available. Around 20 min to Bank.",
+        "taxi": "20–45 min to central London. Around £25–45."
+      },
+      "tip": "London City is the best airport for a stress-free experience — compact, quiet, and fast. You can check in 45 minutes before departure. The Elizabeth Line makes it very accessible from central London. Limited to short/medium haul (except the New York JFK route via Shannon)."
+    },
+    "EMA": {
+      "name": "East Midlands Airport",
+      "city": "Castle Donington",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "timezone": "Europe/London",
+      "type": "departure",
+      "terminals": [
+        {
+          "name": "Main Terminal (single terminal)",
+          "airlines": ["Ryanair", "easyJet", "Jet2", "TUI", "Wizz Air", "Loganair"]
+        }
+      ],
+      "lounges": [
+        { "name": "Escape Lounge", "terminal": "Main", "access": ["Priority Pass", "DragonPass", "pay on door"] }
+      ],
+      "facilities": {
+        "wifi": true,
+        "wifiNotes": "Free wifi.",
+        "showers": false,
+        "showersNotes": "Not available outside lounge.",
+        "food": "Standard budget airport selection. Wetherspoon, Pret, burger bars.",
+        "pharmacy": true,
+        "currencyExchange": true,
+        "leftLuggage": true,
+        "hotelOnsite": false,
+        "hotelNotes": "Radisson Blu on-site, connected to terminal."
+      },
+      "transit": {
+        "minimumMinutes": 45,
+        "recommendedMinutes": 60,
+        "interTerminalTransfer": false,
+        "interTerminalNotes": "Single terminal.",
+        "notes": "Compact and manageable. Security can be slow in peak morning hours. Primarily serves the Midlands region."
+      },
+      "cityLink": {
+        "bus": "Skylink bus to Leicester (1 hr), Nottingham (1 hr), Derby (45 min), Loughborough (30 min).",
+        "taxi": "20 min to Nottingham city centre. Around £25. 30 min to Leicester."
+      },
+      "tip": "A good option if you live in the Midlands. Parking is cheaper than London airports and less stressful. Primarily short-haul European routes and some winter sun charter flights."
+    },
+    "MAN": {
+      "name": "Manchester Airport",
+      "city": "Manchester",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "timezone": "Europe/London",
+      "type": "departure",
+      "terminals": [
+        {
+          "name": "Terminal 1",
+          "airlines": ["easyJet (some)", "Ryanair (some)", "Thomas Cook", "various charter"]
+        },
+        {
+          "name": "Terminal 2",
+          "airlines": ["British Airways", "Jet2", "TUI", "Ryanair (some)", "American Airlines", "Emirates", "Etihad", "Turkish Airlines", "Qatar Airways", "many long-haul carriers"]
+        },
+        {
+          "name": "Terminal 3",
+          "airlines": ["easyJet (main)", "Aer Lingus", "Flybe", "Loganair"]
+        }
+      ],
+      "lounges": [
+        { "name": "Escape Lounge", "terminal": "T1", "access": ["Priority Pass", "DragonPass", "Lounge Pass"] },
+        { "name": "Escape Lounge", "terminal": "T2", "access": ["Priority Pass", "DragonPass", "Lounge Pass"] },
+        { "name": "Escape Lounge", "terminal": "T3", "access": ["Priority Pass", "DragonPass", "Lounge Pass"] },
+        { "name": "Plaza Premium Lounge", "terminal": "T2", "access": ["Priority Pass", "DragonPass"] },
+        { "name": "British Airways Lounge", "terminal": "T2", "access": ["BA Gold/Silver", "oneworld status"] }
+      ],
+      "facilities": {
+        "wifi": true,
+        "wifiNotes": "Free wifi throughout all terminals.",
+        "showers": true,
+        "showersNotes": "Available in lounges and via the Aspire Day Room.",
+        "food": "Good selection in T2, adequate in T1/T3. Multiple restaurants and bars.",
+        "pharmacy": true,
+        "currencyExchange": true,
+        "leftLuggage": true,
+        "hotelOnsite": true,
+        "hotelNotes": "Radisson Blu, Crowne Plaza, and other hotels at the airport. Connected to terminals."
+      },
+      "transit": {
+        "minimumMinutes": 60,
+        "recommendedMinutes": 90,
+        "interTerminalTransfer": true,
+        "interTerminalNotes": "T1 and T2 are connected by the SkyLink (walkway). T3 requires a bus or a longer walk. Allow at least 15–20 minutes to transfer between T3 and other terminals.",
+        "notes": "Manchester is the UK's largest regional airport. T2 has been significantly upgraded — best terminal by far for long-haul. Security can be slow, especially in summer. The airport has strict hand luggage rules — check before you go."
+      },
+      "cityLink": {
+        "trainTram": "Manchester Airport rail station under T2. 20 min to Manchester Piccadilly, trains to most UK cities. Tram (Metrolink) to Manchester city centre in about 50 min.",
+        "taxi": "25–40 min to Manchester city centre. Around £25–35."
+      },
+      "tip": "Terminal 2 is by far the best — spacious, well-designed, and has the most long-haul flights. If you have a choice, fly from T2. Manchester offers surprisingly good transatlantic and long-haul connections for the North of England."
+    },
+    "EDI": {
+      "name": "Edinburgh Airport",
+      "city": "Edinburgh",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "timezone": "Europe/London",
+      "type": "departure",
+      "terminals": [
+        {
+          "name": "Main Terminal (single terminal)",
+          "airlines": ["easyJet", "Ryanair", "British Airways", "Loganair", "Jet2", "TUI", "KLM", "Lufthansa", "Turkish Airlines", "United Airlines (seasonal)", "American Airlines (seasonal)"]
+        }
+      ],
+      "lounges": [
+        { "name": "Escape Lounge", "terminal": "Main", "access": ["Priority Pass", "DragonPass", "Lounge Pass"] },
+        { "name": "No1 Lounge", "terminal": "Main", "access": ["Priority Pass", "DragonPass", "pay on door"] }
+      ],
+      "facilities": {
+        "wifi": true,
+        "wifiNotes": "Free wifi throughout.",
+        "showers": false,
+        "showersNotes": "Available in lounges only.",
+        "food": "Good range — Wetherspoon, Gordon & MacPhail, Caffe Nero, World Duty Free shops.",
+        "pharmacy": true,
+        "currencyExchange": true,
+        "leftLuggage": true,
+        "hotelOnsite": false,
+        "hotelNotes": "Edinburgh Airport Hotel within the terminal complex."
+      },
+      "transit": {
+        "minimumMinutes": 45,
+        "recommendedMinutes": 60,
+        "interTerminalTransfer": false,
+        "interTerminalNotes": "Single terminal.",
+        "notes": "Generally well-managed airport. Security can be slow during busy Edinburgh periods (Festival in August, Hogmanay at New Year). Tram is excellent for city access."
+      },
+      "cityLink": {
+        "tram": "30 min to Princes Street (city centre). Around £9.50 single. Very reliable.",
+        "bus": "Airlink 100 bus service to city centre. Around £5, takes 25–45 min depending on traffic.",
+        "taxi": "25–40 min to city centre. Around £25–35."
+      },
+      "tip": "The tram to the city centre is excellent value and very reliable. During the Edinburgh Festival (August) the airport gets extremely busy — give yourself extra time and book tram tickets in advance."
+    },
+    "BHX": {
+      "name": "Birmingham Airport",
+      "city": "Birmingham",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "timezone": "Europe/London",
+      "type": "departure",
+      "terminals": [
+        {
+          "name": "Terminal 1",
+          "airlines": ["Ryanair", "easyJet (some)", "Jet2", "TUI", "Air Arabia"]
+        },
+        {
+          "name": "Terminal 2",
+          "airlines": ["easyJet (main)", "British Airways", "Emirates", "Turkish Airlines", "Qatar Airways (some)", "Wizz Air"]
+        }
+      ],
+      "lounges": [
+        { "name": "Aspire Executive Lounge", "terminal": "T2", "access": ["Priority Pass", "DragonPass", "Lounge Pass"] },
+        { "name": "Aspire Lounge", "terminal": "T1", "access": ["Priority Pass", "DragonPass"] }
+      ],
+      "facilities": {
+        "wifi": true,
+        "wifiNotes": "Free wifi.",
+        "showers": false,
+        "showersNotes": "Available in lounge only.",
+        "food": "Decent selection across both terminals. Wetherspoon, Giraffe, Wagamama.",
+        "pharmacy": true,
+        "currencyExchange": true,
+        "leftLuggage": true,
+        "hotelOnsite": true,
+        "hotelNotes": "Crowne Plaza Birmingham Airport adjacent to terminal."
+      },
+      "transit": {
+        "minimumMinutes": 45,
+        "recommendedMinutes": 60,
+        "interTerminalTransfer": true,
+        "interTerminalNotes": "T1 and T2 are connected by an internal walkway — short walk.",
+        "notes": "Birmingham is a pleasant, manageable airport. Security is generally efficient. Good for the West Midlands and surrounding areas."
+      },
+      "cityLink": {
+        "train": "Air-Rail Link monorail to Birmingham International rail station (1 min, free). Then 10 min to Birmingham New Street by train.",
+        "taxi": "20–35 min to Birmingham city centre. Around £20–30."
+      },
+      "tip": "The Air-Rail Link to Birmingham International makes this the fastest airport to get into from a UK city centre by rail. Excellent for cross-country connections via Birmingham New Street."
+    },
+    "BRS": {
+      "name": "Bristol Airport",
+      "city": "Bristol",
+      "country": "United Kingdom",
+      "countryCode": "GB",
+      "timezone": "Europe/London",
+      "type": "departure",
+      "terminals": [
+        {
+          "name": "Main Terminal (single terminal)",
+          "airlines": ["easyJet", "Ryanair", "Jet2", "TUI", "KLM", "Wizz Air", "Norwegian", "Loganair"]
+        }
+      ],
+      "lounges": [
+        { "name": "Aspire Lounge", "terminal": "Main", "access": ["Priority Pass", "DragonPass", "Lounge Pass"] }
+      ],
+      "facilities": {
+        "wifi": true,
+        "wifiNotes": "Free wifi.",
+        "showers": false,
+        "showersNotes": "Not available outside lounge.",
+        "food": "Standard selection — Costa, Burger King, Caffe Ritazza.",
+        "pharmacy": true,
+        "currencyExchange": true,
+        "leftLuggage": true,
+        "hotelOnsite": false,
+        "hotelNotes": "Hotel available at the airport. Short taxi to others in the area."
+      },
+      "transit": {
+        "minimumMinutes": 40,
+        "recommendedMinutes": 55,
+        "interTerminalTransfer": false,
+        "interTerminalNotes": "Single terminal.",
+        "notes": "Compact and generally well-run. Security is usually fast. A good alternative to London airports for the South West."
+      },
+      "cityLink": {
+        "bus": "Airport Flyer A1 bus to Bristol city centre. Around 30 min, £7–10.",
+        "taxi": "20–30 min to Bristol city centre. Around £20–30.",
+        "train": "No direct rail link to the terminal — take bus or taxi to Bristol Temple Meads."
+      },
+      "tip": "Bristol has no direct rail link, which is its main downside. The bus is reliable but adds time. Parking and drop-off at Bristol are much cheaper than London airports."
+    }
+  }
+}

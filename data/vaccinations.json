@@ -1,0 +1,317 @@
+{
+  "meta": {
+    "lastUpdated": "2025-05-25",
+    "source": "NHS Fit for Travel / WHO (manual check)",
+    "disclaimer": "General guidance only. Consult your GP or travel clinic ideally 6–8 weeks before departure. Some vaccinations require multiple doses over several weeks."
+  },
+  "countries": {
+    "AR": {
+      "name": "Argentina",
+      "required": [],
+      "recommended": ["Hepatitis A", "Hepatitis B", "Typhoid"],
+      "malaria": {
+        "risk": "none",
+        "areas": null,
+        "notes": "No malaria risk in Argentina."
+      },
+      "notes": "Ensure routine UK vaccinations are up to date (MMR, tetanus, diphtheria, polio). No specific requirements for tourists visiting Buenos Aires or Patagonia."
+    },
+    "AU": {
+      "name": "Australia",
+      "required": [],
+      "recommended": [],
+      "malaria": {
+        "risk": "none",
+        "areas": null,
+        "notes": "No malaria risk."
+      },
+      "notes": "Ensure routine UK vaccinations are up to date. No specific requirements or recommendations for standard tourist visits."
+    },
+    "BR": {
+      "name": "Brazil",
+      "required": [],
+      "recommended": ["Hepatitis A", "Hepatitis B", "Typhoid", "Yellow Fever (if visiting Amazon or Pantanal)"],
+      "malaria": {
+        "risk": "moderate",
+        "areas": "Amazon region and Pantanal only. No risk in Rio, São Paulo, Curitiba, or other major cities.",
+        "notes": "Antimalarial medication recommended if visiting Amazon or Pantanal. Speak to your GP about which type."
+      },
+      "notes": "Yellow fever vaccination certificate required if arriving from certain African or South American countries with yellow fever. Recommended (not required) if visiting Amazon/Pantanal areas. Not needed for standard tourist visits to Rio, São Paulo, or Curitiba."
+    },
+    "CA": {
+      "name": "Canada",
+      "required": [],
+      "recommended": [],
+      "malaria": {
+        "risk": "none",
+        "areas": null,
+        "notes": "No malaria risk."
+      },
+      "notes": "Ensure routine UK vaccinations are up to date. No specific requirements for tourists."
+    },
+    "CO": {
+      "name": "Colombia",
+      "required": [],
+      "recommended": ["Hepatitis A", "Hepatitis B", "Typhoid", "Yellow Fever (if visiting jungle areas)", "Rabies (if visiting rural/jungle areas)"],
+      "malaria": {
+        "risk": "low",
+        "areas": "Some rural areas below 1,600m, including parts of the Amazon and Pacific coast. No risk in Bogotá, Medellín, or Cartagena.",
+        "notes": "Prophylaxis recommended if visiting rural or jungle areas outside major cities."
+      },
+      "notes": "Yellow fever certificate required if arriving from certain countries. Yellow fever vaccination recommended if visiting jungle areas east of the Andes."
+    },
+    "CU": {
+      "name": "Cuba",
+      "required": [],
+      "recommended": ["Hepatitis A", "Hepatitis B", "Typhoid"],
+      "malaria": {
+        "risk": "none",
+        "areas": null,
+        "notes": "No malaria risk."
+      },
+      "notes": "Ensure routine UK vaccinations are up to date. No specific requirements for tourists."
+    },
+    "EG": {
+      "name": "Egypt",
+      "required": [],
+      "recommended": ["Hepatitis A", "Hepatitis B", "Typhoid"],
+      "malaria": {
+        "risk": "none",
+        "areas": "Negligible risk in El Faiyum governorate (June–October only). No risk in tourist areas.",
+        "notes": "Antimalarials not recommended for standard tourist visits."
+      },
+      "notes": "Ensure routine UK vaccinations are up to date. Hepatitis A, B, and typhoid recommended for most tourists. Travellers' diarrhoea is common — take precautions with food and water."
+    },
+    "ID": {
+      "name": "Indonesia",
+      "required": [],
+      "recommended": ["Hepatitis A", "Hepatitis B", "Typhoid", "Rabies"],
+      "malaria": {
+        "risk": "low",
+        "areas": "Risk in some outer islands (Kalimantan, Lombok, Flores, Sumba, Papua). Minimal risk in Bali and Java.",
+        "notes": "No prophylaxis needed for standard Bali visit. Discuss with GP if visiting outer islands or rural areas."
+      },
+      "notes": "Rabies is present in Bali — important to be aware. If you are scratched or bitten by an animal seek medical attention immediately, as rabies is fatal without prompt treatment. Avoid street dogs."
+    },
+    "IN": {
+      "name": "India",
+      "required": [],
+      "recommended": ["Hepatitis A", "Hepatitis B", "Typhoid", "Cholera", "Japanese Encephalitis (rural/long stay)", "Rabies (rural/adventure travel)"],
+      "malaria": {
+        "risk": "moderate",
+        "areas": "Risk across most of India year-round, higher in rural areas and during monsoon season. Lower risk in major cities.",
+        "notes": "Antimalarial medication recommended for most visits outside major cities. Discuss options with your GP."
+      },
+      "notes": "One of the highest vaccination-recommendation destinations. Book a travel clinic appointment 6–8 weeks before travel. Yellow fever certificate required if arriving from an endemic country."
+    },
+    "JP": {
+      "name": "Japan",
+      "required": [],
+      "recommended": [],
+      "malaria": {
+        "risk": "none",
+        "areas": null,
+        "notes": "No malaria risk."
+      },
+      "notes": "Ensure routine UK vaccinations are up to date. No specific recommendations for standard tourist visits. Tick-borne encephalitis vaccination may be considered for rural hiking in some areas."
+    },
+    "KE": {
+      "name": "Kenya",
+      "required": ["Yellow Fever (if arriving from endemic country)"],
+      "recommended": ["Yellow Fever (recommended for all visitors)", "Hepatitis A", "Hepatitis B", "Typhoid", "Rabies", "Cholera"],
+      "malaria": {
+        "risk": "high",
+        "areas": "High risk across most of Kenya year-round, including Nairobi and Mombasa.",
+        "notes": "Antimalarial medication strongly recommended. Use insect repellent (DEET-based) and sleep under a mosquito net."
+      },
+      "notes": "Kenya has one of the higher vaccination requirements of popular destinations. Yellow fever vaccination is strongly recommended regardless of entry requirement. Ensure all routine vaccinations are current."
+    },
+    "KR": {
+      "name": "South Korea",
+      "required": [],
+      "recommended": ["Hepatitis A", "Hepatitis B"],
+      "malaria": {
+        "risk": "none",
+        "areas": null,
+        "notes": "No meaningful malaria risk for tourists."
+      },
+      "notes": "Routine UK vaccinations should be up to date. No significant health risks for standard tourist visits."
+    },
+    "LK": {
+      "name": "Sri Lanka",
+      "required": [],
+      "recommended": ["Hepatitis A", "Hepatitis B", "Typhoid", "Rabies"],
+      "malaria": {
+        "risk": "none",
+        "areas": "Malaria effectively eliminated in Sri Lanka.",
+        "notes": "No prophylaxis needed."
+      },
+      "notes": "Rabies present — avoid contact with animals. Japanese Encephalitis vaccination considered for long stays or rural visits."
+    },
+    "MA": {
+      "name": "Morocco",
+      "required": [],
+      "recommended": ["Hepatitis A", "Hepatitis B", "Typhoid"],
+      "malaria": {
+        "risk": "none",
+        "areas": null,
+        "notes": "No malaria risk."
+      },
+      "notes": "Routine vaccinations should be current. Travellers' diarrhoea risk — drink bottled water and be cautious with street food."
+    },
+    "MX": {
+      "name": "Mexico",
+      "required": [],
+      "recommended": ["Hepatitis A", "Hepatitis B", "Typhoid"],
+      "malaria": {
+        "risk": "low",
+        "areas": "Very low risk in some rural areas of Pacific coast and southern states. No risk in Mexico City, Cancún, or main tourist areas.",
+        "notes": "Prophylaxis not needed for standard tourist visits to major destinations."
+      },
+      "notes": "Ensure routine vaccinations are current. Food and water hygiene important in rural areas."
+    },
+    "MY": {
+      "name": "Malaysia",
+      "required": [],
+      "recommended": ["Hepatitis A", "Hepatitis B", "Typhoid", "Japanese Encephalitis (rural/jungle areas)"],
+      "malaria": {
+        "risk": "low",
+        "areas": "Risk in jungle and rural areas, particularly Sabah and Sarawak (Borneo). No risk in Kuala Lumpur or Penang.",
+        "notes": "Discuss antimalarials with GP if planning jungle trekking in Sabah/Sarawak."
+      },
+      "notes": "Rabies present in some areas — avoid contact with animals."
+    },
+    "NZ": {
+      "name": "New Zealand",
+      "required": [],
+      "recommended": [],
+      "malaria": {
+        "risk": "none",
+        "areas": null,
+        "notes": "No malaria risk."
+      },
+      "notes": "Ensure routine UK vaccinations are current. No specific recommendations for standard tourist visits."
+    },
+    "PE": {
+      "name": "Peru",
+      "required": [],
+      "recommended": ["Hepatitis A", "Hepatitis B", "Typhoid", "Yellow Fever (if visiting Amazon)", "Rabies (jungle areas)"],
+      "malaria": {
+        "risk": "moderate",
+        "areas": "Amazon lowlands (including Iquitos area). No risk in Lima, Cusco, or Machu Picchu (high altitude).",
+        "notes": "Prophylaxis recommended if visiting Amazon. Not needed for Machu Picchu or Lima visits."
+      },
+      "notes": "Yellow fever vaccination recommended before visiting Amazon areas."
+    },
+    "PH": {
+      "name": "Philippines",
+      "required": [],
+      "recommended": ["Hepatitis A", "Hepatitis B", "Typhoid", "Rabies"],
+      "malaria": {
+        "risk": "low",
+        "areas": "Risk in rural Palawan and parts of Mindanao. No risk in Manila, Cebu, Boracay, or most tourist islands.",
+        "notes": "Prophylaxis generally not needed for standard tourist visits. Consider if visiting remote parts of Palawan."
+      },
+      "notes": "Rabies present — if bitten or scratched by an animal seek medical attention immediately."
+    },
+    "QA": {
+      "name": "Qatar",
+      "required": [],
+      "recommended": ["Hepatitis A", "Hepatitis B"],
+      "malaria": {
+        "risk": "none",
+        "areas": null,
+        "notes": "No malaria risk."
+      },
+      "notes": "No significant health risks for standard tourist visits. Routine UK vaccinations should be current."
+    },
+    "SG": {
+      "name": "Singapore",
+      "required": [],
+      "recommended": ["Hepatitis A", "Hepatitis B"],
+      "malaria": {
+        "risk": "none",
+        "areas": null,
+        "notes": "No malaria risk."
+      },
+      "notes": "Excellent healthcare standards. No specific health risks for tourists. Routine UK vaccinations should be current."
+    },
+    "TH": {
+      "name": "Thailand",
+      "required": [],
+      "recommended": ["Hepatitis A", "Hepatitis B", "Typhoid", "Japanese Encephalitis (rural/long stay)", "Rabies (if rural or working with animals)"],
+      "malaria": {
+        "risk": "low",
+        "areas": "Risk in forested border areas with Myanmar and Cambodia. No risk in Bangkok, Phuket, Chiang Mai, or Koh Samui.",
+        "notes": "Prophylaxis generally not needed for standard tourist visits to main destinations."
+      },
+      "notes": "Most tourists visiting Bangkok and popular beach areas need only standard precautions. Discuss Japanese Encephalitis with your GP if planning extended rural travel."
+    },
+    "TR": {
+      "name": "Turkey",
+      "required": [],
+      "recommended": ["Hepatitis A", "Hepatitis B", "Typhoid"],
+      "malaria": {
+        "risk": "none",
+        "areas": "Malaria effectively eliminated. Historic very low risk in far southeast (Cukurova area) not relevant for tourists.",
+        "notes": "No prophylaxis needed."
+      },
+      "notes": "No significant health risks for standard tourist visits. Routine vaccinations should be current."
+    },
+    "TZ": {
+      "name": "Tanzania",
+      "required": [],
+      "recommended": ["Yellow Fever (strongly recommended)", "Hepatitis A", "Hepatitis B", "Typhoid", "Rabies"],
+      "malaria": {
+        "risk": "high",
+        "areas": "High risk across mainland Tanzania and Zanzibar year-round.",
+        "notes": "Antimalarials essential. Use insect repellent (DEET) and sleep under a mosquito net."
+      },
+      "notes": "Yellow fever certificate required if arriving from certain countries; vaccination strongly recommended regardless. Pack insect repellent and malaria medication."
+    },
+    "AE": {
+      "name": "United Arab Emirates",
+      "required": [],
+      "recommended": ["Hepatitis A", "Hepatitis B"],
+      "malaria": {
+        "risk": "none",
+        "areas": null,
+        "notes": "No malaria risk."
+      },
+      "notes": "No specific health requirements for tourists. Routine UK vaccinations should be current."
+    },
+    "US": {
+      "name": "United States",
+      "required": [],
+      "recommended": [],
+      "malaria": {
+        "risk": "none",
+        "areas": null,
+        "notes": "No meaningful malaria risk for tourists."
+      },
+      "notes": "Ensure routine UK vaccinations are up to date. No specific travel health requirements."
+    },
+    "VN": {
+      "name": "Vietnam",
+      "required": [],
+      "recommended": ["Hepatitis A", "Hepatitis B", "Typhoid", "Japanese Encephalitis (rural/long stay)", "Rabies (rural areas)"],
+      "malaria": {
+        "risk": "low",
+        "areas": "Some risk in rural highland areas in the south. No meaningful risk in Hanoi, Ho Chi Minh City, Hoi An, Ha Long Bay, or major tourist areas.",
+        "notes": "Prophylaxis generally not needed for standard tourist visits to main destinations."
+      },
+      "notes": "Most tourists visiting cities and popular sites need only standard precautions. Consider Japanese Encephalitis vaccine for extended rural stays."
+    },
+    "ZA": {
+      "name": "South Africa",
+      "required": [],
+      "recommended": ["Hepatitis A", "Hepatitis B", "Typhoid", "Rabies"],
+      "malaria": {
+        "risk": "moderate",
+        "areas": "Risk in Limpopo, Mpumalanga (Kruger Park area), and northern KwaZulu-Natal. No risk in Cape Town, Johannesburg, or Garden Route.",
+        "notes": "Prophylaxis recommended if visiting Kruger National Park or these provinces. Not needed for Cape Town or Johannesburg."
+      },
+      "notes": "Yellow fever certificate required if arriving from an endemic country. Rabies present — avoid contact with animals."
+    }
+  }
+}
