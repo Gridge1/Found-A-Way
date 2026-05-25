@@ -5,6 +5,26 @@ Format: **[vX.X]** — Date — What changed and why.
 
 ---
 
+## [v2.0] — 2026-05-25 — Live Info Panels
+
+Populated all 6 info panel cards with real data. No backend required — all data served from static JSON files and the free frankfurter.app currency API.
+
+**What's in v2:**
+- **Visa card** — loads from `data/visa-fallback.json`. Shows colour-coded type badge (Visa Free / ETA / e-Visa / Visa on Arrival), max stay, cost, processing time, iVisa application link where applicable, and gov.uk advice link
+- **Health & Vaccinations card** — loads from `data/vaccinations.json`. Shows malaria risk badge (colour-coded none/low/moderate/high), required vaccinations (red), recommended vaccinations, and country-specific notes
+- **Currency & Rates card** — fetches live GBP exchange rate + 30-day history from frankfurter.app (free, no API key). Shows current rate, SVG line chart trending green (up) or red (down), and a live GBP → local currency calculator
+- **Airport Guide card** — loads from `data/airports.json`. Shows on search submit (origin airport). Displays terminal count, lounge count, facility chips (WiFi, showers, left luggage, hotel, pharmacy, currency), and insider tip. Covers 10 UK departure airports
+- **Best Time to Book card** — loads from `data/booking-windows.json`. Shows weeks-ahead booking advice and 12-month colour-coded chips (green = cheapest, red = peak, grey = neutral). Falls back to regional data when no exact route match
+- **Hotels card** — Booking.com affiliate search deeplink for the destination country
+- Cards show loading spinner while fetching, graceful "unavailable" fallback on error
+- All JSON files cached after first fetch (no redundant network calls)
+
+**Snapshot saved:** `versions/v2.0-info-panels.html`
+
+**Next:** v3 — visa data for more countries, real affiliate IDs, legal pages (Privacy Policy, Terms, Affiliate Disclosure)
+
+---
+
 ## [v1.0] — 2025-05-25 — Search Form
 
 Built the complete v1 UI in `index.html`. No backend required — opens directly in a browser.
