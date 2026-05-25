@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Find cheap flights and get everything you need before you travel — visa info, vaccinations, currency and more.">
+  <title>Found A Way — Smart Travel Companion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080f1d;
+      --surface: #0f1f38;
+      --surface-2: #162844;
+      --surface-hover: #1e3557;
+      --accent: #f59e0b;
+      --accent-dark: #d97706;
+      --accent-glow: rgba(245,158,11,0.12);
+      --text: #f1f5f9;
+      --text-muted: #8eaabe;
+      --text-dim: #3d5470;
+      --border: rgba(100,160,220,0.12);
+      --border-focus: rgba(245,158,11,0.45);
+      --success: #10b981;
+      --error: #ef4444;
+      --radius: 14px;
+      --radius-sm: 8px;
+      --shadow: 0 8px 32px rgba(0,0,0,0.5);
+      --t: 0.18s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* ── HEADER ───────────────────────────────── */
+    header {
+      padding: 36px 20px 0;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: var(--accent); }
+
+    .tagline {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+
+    /* ── MAIN ─────────────────────────────────── */
+    main {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+    }
+
+    /* ── SEARCH CARD ──────────────────────────── */
+    .search-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    /* ── TRIP TABS ────────────────────────────── */
+    .trip-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .trip-tab {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 6px 16px;
+      transition: var(--t);
+    }
+
+    .trip-tab.active {
+      background: var(--accent-glow);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── FIELD LABEL ──────────────────────────── */
+    .field-label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    /* ── ROUTE ROW ────────────────────────────── */
+    .route-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .route-field { flex: 1; position: relative; }
+
+    .field-input {
+      width: 100%;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 12px 14px;
+      outline: none;
+      transition: var(--t);
+    }
+
+    .field-input::placeholder { color: var(--text-dim); font-weight: 400; }
+    .field-input:focus { border-color: var(--border-focus); background: var(--surface-hover); }
+
+    /* ── SWAP BUTTON ──────────────────────────── */
+    .swap-btn {
+      align-items: center;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      flex-shrink: 0;
+      font-size: 1rem;
+      height: 40px;
+      justify-content: center;
+      margin-bottom: 1px;
+      transition: var(--t);
+      width: 40px;
+    }
+
+    .swap-btn:hover { background: var(--surface-hover); color: var(--accent); transform: rotate(180deg); }
+
+    /* ── AUTOCOMPLETE ─────────────────────────── */
+    .ac-wrapper { position: relative; }
+
+    .ac-list {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+      left: 0; right: 0;
+      list-style: none;
+      max-height: 260px;
+      overflow-y: auto;
+      position: absolute;
+      top: calc(100% + 4px);
+      z-index: 200;
+    }
+
+    .ac-list.hidden { display: none; }
+
+    .ac-item {
+      align-items: center;
+      cursor: pointer;
+      display: flex;
+      gap: 10px;
+      padding: 10px 14px;
+      transition: background var(--t);
+    }
+
+    .ac-item:hover { background: var(--surface-hover); }
+
+    .ac-code {
+      background: var(--accent-glow);
+      border-radius: 4px;
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 700;
+      min-width: 36px;
+      padding: 3px 6px;
+      text-align: center;
+    }
+
+    .ac-name { font-size: 0.87rem; font-weight: 500; }
+    .ac-sub { color: var(--text-muted); font-size: 0.75rem; }
+
+    /* ── DATE ROW ─────────────────────────────── */
+    .date-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .date-row.oneway { grid-template-columns: 1fr; }
+    input[type="date"] { color-scheme: dark; }
+
+    /* ── OPTIONS ROW ──────────────────────────── */
+    .options-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .check-label {
+      align-items: center;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      font-size: 0.85rem;
+      gap: 8px;
+      user-select: none;
+    }
+
+    .check-label input { accent-color: var(--accent); height: 15px; width: 15px; }
+
+    /* ── BOTTOM ROW ───────────────────────────── */
+    .bottom-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .pax-wrapper { flex: 1; position: relative; }
+
+    .pax-btn-trigger {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 12px 14px;
+      text-align: left;
+      transition: var(--t);
+      width: 100%;
+    }
+
+    .pax-btn-trigger:hover { background: var(--surface-hover); }
+
+    .cabin-sel {
+      appearance: none;
+      background: var(--surface-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%238eaabe' d='M5 7L0 2h10z'/%3E%3C/svg%3E") no-repeat right 14px center;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      cursor: pointer;
+      flex: 1;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 500;
+      outline: none;
+      padding: 12px 36px 12px 14px;
+      transition: var(--t);
+    }
+
+    .cabin-sel:focus { border-color: var(--border-focus); }
+
+    /* ── PAX POPUP ────────────────────────────── */
+    .pax-popup {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: none;
+      left: 0;
+      padding: 16px;
+      position: absolute;
+      top: calc(100% + 6px);
+      width: 270px;
+      z-index: 300;
+    }
+
+    .pax-popup.open { display: block; }
+
+    .pax-row {
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+    }
+
+    .pax-row:last-of-type { border: none; }
+    .pax-label { font-size: 0.9rem; font-weight: 500; }
+    .pax-sub { color: var(--text-muted); font-size: 0.74rem; }
+
+    .pax-controls { align-items: center; display: flex; gap: 14px; }
+
+    .pax-ctrl {
+      align-items: center;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      font-size: 1rem;
+      height: 28px;
+      justify-content: center;
+      transition: var(--t);
+      width: 28px;
+    }
+
+    .pax-ctrl:hover { background: var(--surface-hover); color: var(--accent); }
+    .pax-ctrl:disabled { opacity: 0.3; cursor: not-allowed; }
+    .pax-num { font-weight: 600; min-width: 18px; text-align: center; }
+
+    .popup-done {
+      background: var(--accent);
+      border: none;
+      border-radius: var(--radius-sm);
+      color: #000;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-top: 12px;
+      padding: 9px;
+      transition: var(--t);
+      width: 100%;
+    }
+
+    .popup-done:hover { background: var(--accent-dark); }
+
+    /* ── SEARCH BUTTON ────────────────────────── */
+    .search-btn {
+      background: var(--accent);
+      border: none;
+      border-radius: var(--radius-sm);
+      color: #080f1d;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 14px;
+      transition: var(--t);
+      width: 100%;
+    }
+
+    .search-btn:hover {
+      background: var(--accent-dark);
+      box-shadow: 0 4px 20px rgba(245,158,11,0.3);
+      transform: translateY(-1px);
+    }
+
+    .search-btn:active { transform: none; }
+
+    /* ── FORM ERROR ────────────────────────────── */
+    .form-error {
+      background: rgba(239,68,68,0.08);
+      border: 1px solid rgba(239,68,68,0.25);
+      border-radius: var(--radius-sm);
+      color: #fca5a5;
+      display: none;
+      font-size: 0.85rem;
+      margin-top: 12px;
+      padding: 10px 14px;
+    }
+
+    /* ── BOOKING PANEL ────────────────────────── */
+    .booking-panel { display: none; margin-top: 14px; }
+    .booking-panel.visible { display: block; }
+
+    .panel-label {
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .booking-links { display: flex; flex-direction: column; gap: 8px; }
+
+    .booking-link {
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      display: flex;
+      gap: 14px;
+      padding: 14px 16px;
+      text-decoration: none;
+      transition: var(--t);
+    }
+
+    .booking-link:hover {
+      background: var(--surface-hover);
+      border-color: rgba(245,158,11,0.4);
+      transform: translateX(3px);
+    }
+
+    .bl-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .bl-name { font-size: 0.95rem; font-weight: 600; }
+    .bl-desc { color: var(--text-muted); font-size: 0.78rem; }
+    .bl-arrow { color: var(--accent); font-size: 1.1rem; margin-left: auto; }
+
+    /* ── MULTI-AIRPORT PANEL ──────────────────── */
+    .multi-panel { display: none; margin-top: 14px; }
+    .multi-panel.visible { display: block; }
+
+    .multi-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+
+    .multi-link {
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      display: flex;
+      font-size: 0.85rem;
+      font-weight: 500;
+      justify-content: space-between;
+      padding: 10px 14px;
+      text-decoration: none;
+      transition: var(--t);
+    }
+
+    .multi-link:hover { background: var(--surface-hover); border-color: rgba(245,158,11,0.3); }
+    .multi-iata { color: var(--accent); font-size: 0.78rem; font-weight: 700; }
+
+    /* ── INFO SECTION ─────────────────────────── */
+    .info-section { display: none; margin-top: 24px; }
+    .info-section.visible { display: block; }
+
+    .info-dest {
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .info-dest strong { color: var(--text); font-weight: 700; }
+
+    .info-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-card::after {
+      content: '';
+      background: var(--accent);
+      height: 2px;
+      left: 0; right: 0; top: 0;
+      opacity: 0.25;
+      position: absolute;
+    }
+
+    .info-icon { display: block; font-size: 1.4rem; margin-bottom: 10px; }
+    .info-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
+    .info-body { color: var(--text-muted); font-size: 0.77rem; line-height: 1.45; }
+
+    .soon-badge {
+      background: var(--accent-glow);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 10px;
+      color: var(--accent);
+      display: inline-block;
+      font-size: 0.67rem;
+      font-weight: 600;
+      margin-top: 8px;
+      padding: 2px 8px;
+    }
+
+    /* ── FOOTER ───────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      line-height: 1.7;
+      margin-top: 48px;
+      padding: 24px 16px;
+      text-align: center;
+    }
+
+    footer a { color: var(--text-muted); }
+
+    /* ── RESPONSIVE ───────────────────────────── */
+    @media (max-width: 500px) {
+      .route-row { flex-direction: column; }
+      .swap-btn { margin: 0 auto; transform: rotate(90deg); }
+      .swap-btn:hover { transform: rotate(270deg); }
+      .date-row { grid-template-columns: 1fr; }
+      .bottom-row { flex-direction: column; }
+      .info-grid { grid-template-columns: 1fr; }
+      .logo { font-size: 1.6rem; }
+    }
+
+    @media (min-width: 600px) {
+      header { padding: 48px 20px 0; }
+      .search-card { padding: 32px; }
+      .logo { font-size: 2.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Found A <span>Way</span></div>
+  <p class="tagline">Everything you need before you book</p>
+</header>
+
+<main>
+  <div class="search-card">
+
+    <!-- Trip type -->
+    <div class="trip-tabs">
+      <button class="trip-tab active" onclick="setTrip('return',this)">Return</button>
+      <button class="trip-tab" onclick="setTrip('oneway',this)">One-way</button>
+    </div>
+
+    <!-- Route -->
+    <div class="route-row">
+      <div class="route-field">
+        <label class="field-label">From</label>
+        <div class="ac-wrapper">
+          <input class="field-input" id="originInput" type="text" placeholder="Country or airport" autocomplete="off"
+            oninput="showAC(this,'originList')" onblur="hideAC('originList')">
+          <input type="hidden" id="originCode">
+          <ul class="ac-list hidden" id="originList"></ul>
+        </div>
+      </div>
+
+      <button class="swap-btn" onclick="doSwap()" title="Swap">⇄</button>
+
+      <div class="route-field">
+        <label class="field-label">To</label>
+        <div class="ac-wrapper">
+          <input class="field-input" id="destInput" type="text" placeholder="Country or airport" autocomplete="off"
+            oninput="showAC(this,'destList')" onblur="hideAC('destList')">
+          <input type="hidden" id="destCode">
+          <ul class="ac-list hidden" id="destList"></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dates -->
+    <div class="date-row" id="dateRow">
+      <div>
+        <label class="field-label" for="outbound">Outbound</label>
+        <input class="field-input" id="outbound" type="date">
+      </div>
+      <div id="returnWrap">
+        <label class="field-label" for="returnDate">Return</label>
+        <input class="field-input" id="returnDate" type="date">
+      </div>
+    </div>
+
+    <!-- Options -->
+    <div class="options-row">
+      <label class="check-label">
+        <input type="checkbox" id="flexible"> Flexible ±3 days
+      </label>
+    </div>
+
+    <!-- Passengers + cabin -->
+    <div class="bottom-row">
+      <div class="pax-wrapper">
+        <label class="field-label">Passengers</label>
+        <button class="pax-btn-trigger" id="paxTrigger" type="button" onclick="togglePax(event)">
+          👤 <span id="paxLabel">1 adult</span>
+        </button>
+        <div class="pax-popup" id="paxPopup">
+          <div class="pax-row">
+            <div><div class="pax-label">Adults</div><div class="pax-sub">18+ years</div></div>
+            <div class="pax-controls">
+              <button class="pax-ctrl" id="adultsDn" onclick="adj('adults',-1)">−</button>
+              <span class="pax-num" id="adultsN">1</span>
+              <button class="pax-ctrl" onclick="adj('adults',1)">+</button>
+            </div>
+          </div>
+          <div class="pax-row">
+            <div><div class="pax-label">Children</div><div class="pax-sub">2–17 years</div></div>
+            <div class="pax-controls">
+              <button class="pax-ctrl" id="childDn" onclick="adj('children',-1)">−</button>
+              <span class="pax-num" id="childrenN">0</span>
+              <button class="pax-ctrl" onclick="adj('children',1)">+</button>
+            </div>
+          </div>
+          <div class="pax-row">
+            <div><div class="pax-label">Infants</div><div class="pax-sub">Under 2 years</div></div>
+            <div class="pax-controls">
+              <button class="pax-ctrl" id="infantDn" onclick="adj('infants',-1)">−</button>
+              <span class="pax-num" id="infantsN">0</span>
+              <button class="pax-ctrl" onclick="adj('infants',1)">+</button>
+            </div>
+          </div>
+          <button class="popup-done" onclick="closePax()">Done</button>
+        </div>
+      </div>
+
+      <div style="flex:1">
+        <label class="field-label">Cabin class</label>
+        <select class="cabin-sel" id="cabin">
+          <option value="economy">Economy</option>
+          <option value="premiumeconomy">Premium Economy</option>
+          <option value="business">Business</option>
+          <option value="first">First Class</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="search-btn" onclick="doSearch()">Search flights →</button>
+    <div class="form-error" id="formErr"></div>
+  </div>
+
+  <!-- Booking links -->
+  <div class="booking-panel" id="bookingPanel">
+    <div class="panel-label">Book your flight</div>
+    <div class="booking-links">
+      <a id="googleLink" href="#" target="_blank" rel="noopener" class="booking-link">
+        <span class="bl-icon">🔍</span>
+        <div><div class="bl-name">Compare prices</div><div class="bl-desc">Google Flights — see all airlines at once</div></div>
+        <span class="bl-arrow">→</span>
+      </a>
+      <a id="skyLink" href="#" target="_blank" rel="noopener" class="booking-link">
+        <span class="bl-icon">✈️</span>
+        <div><div class="bl-name">Book on Skyscanner</div><div class="bl-desc">Find the cheapest fare and book direct</div></div>
+        <span class="bl-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Multi-airport panel -->
+  <div class="multi-panel" id="multiPanel">
+    <div class="panel-label" id="multiLabel">Search from each airport</div>
+    <div class="multi-grid" id="multiGrid"></div>
+  </div>
+
+  <!-- Info panels -->
+  <div class="info-section" id="infoSection">
+    <div class="info-dest">Travel info for <strong id="destName">your destination</strong></div>
+    <div class="info-grid">
+      <div class="info-card">
+        <span class="info-icon">🛂</span>
+        <div class="info-title">Visa Requirements</div>
+        <div class="info-body">Entry requirements, visa types, costs and processing times for UK passport holders.</div>
+        <span class="soon-badge">Coming soon</span>
+      </div>
+      <div class="info-card">
+        <span class="info-icon">💉</span>
+        <div class="info-title">Health &amp; Vaccinations</div>
+        <div class="info-body">Required and recommended jabs, malaria risk and health precautions.</div>
+        <span class="soon-badge">Coming soon</span>
+      </div>
+      <div class="info-card">
+        <span class="info-icon">💱</span>
+        <div class="info-title">Currency &amp; Rates</div>
+        <div class="info-body">Live GBP exchange rate, 30-day trend and a quick currency calculator.</div>
+        <span class="soon-badge">Coming soon</span>
+      </div>
+      <div class="info-card">
+        <span class="info-icon">🏢</span>
+        <div class="info-title">Airport Guide</div>
+        <div class="info-body">Terminals, lounges, layover ratings and transit times for every stop on your route.</div>
+        <span class="soon-badge">Coming soon</span>
+      </div>
+      <div class="info-card">
+        <span class="info-icon">📅</span>
+        <div class="info-title">Best Time to Book</div>
+        <div class="info-body">When to buy for the lowest fare on this route and which months to avoid.</div>
+        <span class="soon-badge">Coming soon</span>
+      </div>
+      <div class="info-card">
+        <span class="info-icon">🏨</span>
+        <div class="info-title">Hotels</div>
+        <div class="info-body">Compare and book accommodation at your destination through Booking.com.</div>
+        <span class="soon-badge">Coming soon</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>We may earn a commission when you book through our links — at no extra cost to you. <a href="#">Affiliate disclosure</a></p>
+  <p>Visa and health info is for general guidance only. Always verify at <a href="https://www.gov.uk/foreign-travel-advice" target="_blank" rel="noopener">gov.uk/foreign-travel-advice</a> before travel.</p>
+</footer>
+
+<script>
+// ── AIRPORT DATA ───────────────────────────────────────────────────────────
+const AP = [
+  // United Kingdom
+  {i:'LHR',n:'London Heathrow',c:'London',co:'United Kingdom',cc:'GB'},
+  {i:'LGW',n:'London Gatwick',c:'London',co:'United Kingdom',cc:'GB'},
+  {i:'STN',n:'London Stansted',c:'London',co:'United Kingdom',cc:'GB'},
+  {i:'LTN',n:'London Luton',c:'London',co:'United Kingdom',cc:'GB'},
+  {i:'LCY',n:'London City',c:'London',co:'United Kingdom',cc:'GB'},
+  {i:'EMA',n:'East Midlands',c:'Nottingham',co:'United Kingdom',cc:'GB'},
+  {i:'MAN',n:'Manchester Airport',c:'Manchester',co:'United Kingdom',cc:'GB'},
+  {i:'BHX',n:'Birmingham Airport',c:'Birmingham',co:'United Kingdom',cc:'GB'},
+  {i:'EDI',n:'Edinburgh Airport',c:'Edinburgh',co:'United Kingdom',cc:'GB'},
+  {i:'GLA',n:'Glasgow International',c:'Glasgow',co:'United Kingdom',cc:'GB'},
+  {i:'BRS',n:'Bristol Airport',c:'Bristol',co:'United Kingdom',cc:'GB'},
+  {i:'NCL',n:'Newcastle Airport',c:'Newcastle',co:'United Kingdom',cc:'GB'},
+  {i:'LPL',n:'Liverpool John Lennon',c:'Liverpool',co:'United Kingdom',cc:'GB'},
+  {i:'LBA',n:'Leeds Bradford',c:'Leeds',co:'United Kingdom',cc:'GB'},
+  {i:'ABZ',n:'Aberdeen Airport',c:'Aberdeen',co:'United Kingdom',cc:'GB'},
+  {i:'BFS',n:'Belfast International',c:'Belfast',co:'United Kingdom',cc:'GB'},
+  {i:'BHD',n:'George Best Belfast City',c:'Belfast',co:'United Kingdom',cc:'GB'},
+  {i:'SOU',n:'Southampton Airport',c:'Southampton',co:'United Kingdom',cc:'GB'},
+  {i:'EXT',n:'Exeter Airport',c:'Exeter',co:'United Kingdom',cc:'GB'},
+  {i:'INV',n:'Inverness Airport',c:'Inverness',co:'United Kingdom',cc:'GB'},
+  // Europe
+  {i:'CDG',n:'Paris Charles de Gaulle',c:'Paris',co:'France',cc:'FR'},
+  {i:'ORY',n:'Paris Orly',c:'Paris',co:'France',cc:'FR'},
+  {i:'NCE',n:'Nice Côte d\'Azur',c:'Nice',co:'France',cc:'FR'},
+  {i:'MRS',n:'Marseille Provence',c:'Marseille',co:'France',cc:'FR'},
+  {i:'AMS',n:'Amsterdam Schiphol',c:'Amsterdam',co:'Netherlands',cc:'NL'},
+  {i:'FRA',n:'Frankfurt Airport',c:'Frankfurt',co:'Germany',cc:'DE'},
+  {i:'MUC',n:'Munich Airport',c:'Munich',co:'Germany',cc:'DE'},
+  {i:'BER',n:'Berlin Brandenburg',c:'Berlin',co:'Germany',cc:'DE'},
+  {i:'HAM',n:'Hamburg Airport',c:'Hamburg',co:'Germany',cc:'DE'},
+  {i:'BCN',n:'Barcelona El Prat',c:'Barcelona',co:'Spain',cc:'ES'},
+  {i:'MAD',n:'Madrid Barajas',c:'Madrid',co:'Spain',cc:'ES'},
+  {i:'AGP',n:'Málaga Airport',c:'Málaga',co:'Spain',cc:'ES'},
+  {i:'PMI',n:'Palma de Mallorca',c:'Palma',co:'Spain',cc:'ES'},
+  {i:'ALC',n:'Alicante Airport',c:'Alicante',co:'Spain',cc:'ES'},
+  {i:'TFS',n:'Tenerife South',c:'Tenerife',co:'Spain',cc:'ES'},
+  {i:'LPA',n:'Gran Canaria Airport',c:'Las Palmas',co:'Spain',cc:'ES'},
+  {i:'LIS',n:'Lisbon Airport',c:'Lisbon',co:'Portugal',cc:'PT'},
+  {i:'OPO',n:'Porto Airport',c:'Porto',co:'Portugal',cc:'PT'},
+  {i:'FAO',n:'Faro Airport',c:'Faro',co:'Portugal',cc:'PT'},
+  {i:'FCO',n:'Rome Fiumicino',c:'Rome',co:'Italy',cc:'IT'},
+  {i:'MXP',n:'Milan Malpensa',c:'Milan',co:'Italy',cc:'IT'},
+  {i:'VCE',n:'Venice Marco Polo',c:'Venice',co:'Italy',cc:'IT'},
+  {i:'NAP',n:'Naples Airport',c:'Naples',co:'Italy',cc:'IT'},
+  {i:'CTA',n:'Catania Fontanarossa',c:'Catania',co:'Italy',cc:'IT'},
+  {i:'ZRH',n:'Zurich Airport',c:'Zurich',co:'Switzerland',cc:'CH'},
+  {i:'GVA',n:'Geneva Airport',c:'Geneva',co:'Switzerland',cc:'CH'},
+  {i:'CPH',n:'Copenhagen Airport',c:'Copenhagen',co:'Denmark',cc:'DK'},
+  {i:'ARN',n:'Stockholm Arlanda',c:'Stockholm',co:'Sweden',cc:'SE'},
+  {i:'OSL',n:'Oslo Gardermoen',c:'Oslo',co:'Norway',cc:'NO'},
+  {i:'HEL',n:'Helsinki Airport',c:'Helsinki',co:'Finland',cc:'FI'},
+  {i:'VIE',n:'Vienna International',c:'Vienna',co:'Austria',cc:'AT'},
+  {i:'PRG',n:'Prague Václav Havel',c:'Prague',co:'Czech Republic',cc:'CZ'},
+  {i:'WAW',n:'Warsaw Chopin',c:'Warsaw',co:'Poland',cc:'PL'},
+  {i:'BUD',n:'Budapest Liszt Ferenc',c:'Budapest',co:'Hungary',cc:'HU'},
+  {i:'ATH',n:'Athens International',c:'Athens',co:'Greece',cc:'GR'},
+  {i:'HER',n:'Heraklion (Crete)',c:'Heraklion',co:'Greece',cc:'GR'},
+  {i:'RHO',n:'Rhodes Airport',c:'Rhodes',co:'Greece',cc:'GR'},
+  {i:'SKG',n:'Thessaloniki Airport',c:'Thessaloniki',co:'Greece',cc:'GR'},
+  {i:'CFU',n:'Corfu Airport',c:'Corfu',co:'Greece',cc:'GR'},
+  {i:'IST',n:'Istanbul Airport',c:'Istanbul',co:'Turkey',cc:'TR'},
+  {i:'SAW',n:'Istanbul Sabiha Gökçen',c:'Istanbul',co:'Turkey',cc:'TR'},
+  {i:'AYT',n:'Antalya Airport',c:'Antalya',co:'Turkey',cc:'TR'},
+  {i:'DUB',n:'Dublin Airport',c:'Dublin',co:'Ireland',cc:'IE'},
+  {i:'OTP',n:'Bucharest Henri Coandă',c:'Bucharest',co:'Romania',cc:'RO'},
+  {i:'SOF',n:'Sofia Airport',c:'Sofia',co:'Bulgaria',cc:'BG'},
+  {i:'ZAG',n:'Zagreb Airport',c:'Zagreb',co:'Croatia',cc:'HR'},
+  {i:'SPU',n:'Split Airport',c:'Split',co:'Croatia',cc:'HR'},
+  {i:'DBV',n:'Dubrovnik Airport',c:'Dubrovnik',co:'Croatia',cc:'HR'},
+  {i:'SKP',n:'Skopje Airport',c:'Skopje',co:'North Macedonia',cc:'MK'},
+  {i:'TIA',n:'Tirana International',c:'Tirana',co:'Albania',cc:'AL'},
+  {i:'LCA',n:'Larnaca Airport',c:'Larnaca',co:'Cyprus',cc:'CY'},
+  {i:'PFO',n:'Paphos Airport',c:'Paphos',co:'Cyprus',cc:'CY'},
+  {i:'RIX',n:'Riga International',c:'Riga',co:'Latvia',cc:'LV'},
+  {i:'VNO',n:'Vilnius Airport',c:'Vilnius',co:'Lithuania',cc:'LT'},
+  {i:'TLL',n:'Tallinn Airport',c:'Tallinn',co:'Estonia',cc:'EE'},
+  // North America
+  {i:'JFK',n:'New York JFK',c:'New York',co:'United States',cc:'US'},
+  {i:'EWR',n:'Newark Liberty',c:'New York',co:'United States',cc:'US'},
+  {i:'LGA',n:'LaGuardia Airport',c:'New York',co:'United States',cc:'US'},
+  {i:'LAX',n:'Los Angeles International',c:'Los Angeles',co:'United States',cc:'US'},
+  {i:'ORD',n:'Chicago O\'Hare',c:'Chicago',co:'United States',cc:'US'},
+  {i:'ATL',n:'Atlanta Hartsfield-Jackson',c:'Atlanta',co:'United States',cc:'US'},
+  {i:'MIA',n:'Miami International',c:'Miami',co:'United States',cc:'US'},
+  {i:'SFO',n:'San Francisco International',c:'San Francisco',co:'United States',cc:'US'},
+  {i:'SEA',n:'Seattle-Tacoma',c:'Seattle',co:'United States',cc:'US'},
+  {i:'BOS',n:'Boston Logan',c:'Boston',co:'United States',cc:'US'},
+  {i:'DEN',n:'Denver International',c:'Denver',co:'United States',cc:'US'},
+  {i:'DFW',n:'Dallas/Fort Worth',c:'Dallas',co:'United States',cc:'US'},
+  {i:'MCO',n:'Orlando International',c:'Orlando',co:'United States',cc:'US'},
+  {i:'LAS',n:'Las Vegas Harry Reid',c:'Las Vegas',co:'United States',cc:'US'},
+  {i:'IAD',n:'Washington Dulles',c:'Washington DC',co:'United States',cc:'US'},
+  {i:'YYZ',n:'Toronto Pearson',c:'Toronto',co:'Canada',cc:'CA'},
+  {i:'YVR',n:'Vancouver International',c:'Vancouver',co:'Canada',cc:'CA'},
+  {i:'YUL',n:'Montréal-Trudeau',c:'Montréal',co:'Canada',cc:'CA'},
+  {i:'YYC',n:'Calgary International',c:'Calgary',co:'Canada',cc:'CA'},
+  {i:'MEX',n:'Mexico City International',c:'Mexico City',co:'Mexico',cc:'MX'},
+  {i:'CUN',n:'Cancún International',c:'Cancún',co:'Mexico',cc:'MX'},
+  {i:'GDL',n:'Guadalajara International',c:'Guadalajara',co:'Mexico',cc:'MX'},
+  {i:'HAV',n:'Havana José Martí',c:'Havana',co:'Cuba',cc:'CU'},
+  {i:'PUJ',n:'Punta Cana International',c:'Punta Cana',co:'Dominican Republic',cc:'DO'},
+  {i:'MBJ',n:'Sangster International',c:'Montego Bay',co:'Jamaica',cc:'JM'},
+  {i:'NAS',n:'Lynden Pindling International',c:'Nassau',co:'Bahamas',cc:'BS'},
+  // South America
+  {i:'GRU',n:'São Paulo Guarulhos',c:'São Paulo',co:'Brazil',cc:'BR'},
+  {i:'GIG',n:'Rio de Janeiro Galeão',c:'Rio de Janeiro',co:'Brazil',cc:'BR'},
+  {i:'CWB',n:'Curitiba Afonso Pena',c:'Curitiba',co:'Brazil',cc:'BR'},
+  {i:'BSB',n:'Brasília International',c:'Brasília',co:'Brazil',cc:'BR'},
+  {i:'SSA',n:'Salvador International',c:'Salvador',co:'Brazil',cc:'BR'},
+  {i:'FOR',n:'Fortaleza Pinto Martins',c:'Fortaleza',co:'Brazil',cc:'BR'},
+  {i:'REC',n:'Recife Guararapes',c:'Recife',co:'Brazil',cc:'BR'},
+  {i:'MCZ',n:'Maceió Zumbi dos Palmares',c:'Maceió',co:'Brazil',cc:'BR'},
+  {i:'MAN',n:'Manaus Eduardo Gomes',c:'Manaus',co:'Brazil',cc:'BR'},
+  {i:'EZE',n:'Buenos Aires Ezeiza',c:'Buenos Aires',co:'Argentina',cc:'AR'},
+  {i:'AEP',n:'Buenos Aires Aeroparque',c:'Buenos Aires',co:'Argentina',cc:'AR'},
+  {i:'COR',n:'Córdoba Airport',c:'Córdoba',co:'Argentina',cc:'AR'},
+  {i:'BOG',n:'Bogotá El Dorado',c:'Bogotá',co:'Colombia',cc:'CO'},
+  {i:'MDE',n:'Medellín José María Córdova',c:'Medellín',co:'Colombia',cc:'CO'},
+  {i:'CTG',n:'Cartagena Rafael Núñez',c:'Cartagena',co:'Colombia',cc:'CO'},
+  {i:'LIM',n:'Lima Jorge Chávez',c:'Lima',co:'Peru',cc:'PE'},
+  {i:'CUZ',n:'Cusco Alejandro Velasco Astete',c:'Cusco',co:'Peru',cc:'PE'},
+  {i:'SCL',n:'Santiago Arturo Merino Benítez',c:'Santiago',co:'Chile',cc:'CL'},
+  {i:'UIO',n:'Quito Mariscal Sucre',c:'Quito',co:'Ecuador',cc:'EC'},
+  {i:'GYE',n:'Guayaquil José Joaquín de Olmedo',c:'Guayaquil',co:'Ecuador',cc:'EC'},
+  {i:'MVD',n:'Montevideo Carrasco',c:'Montevideo',co:'Uruguay',cc:'UY'},
+  {i:'VVI',n:'Santa Cruz Viru Viru',c:'Santa Cruz',co:'Bolivia',cc:'BO'},
+  // Middle East
+  {i:'DXB',n:'Dubai International',c:'Dubai',co:'United Arab Emirates',cc:'AE'},
+  {i:'AUH',n:'Abu Dhabi International',c:'Abu Dhabi',co:'United Arab Emirates',cc:'AE'},
+  {i:'DOH',n:'Doha Hamad International',c:'Doha',co:'Qatar',cc:'QA'},
+  {i:'BAH',n:'Bahrain International',c:'Manama',co:'Bahrain',cc:'BH'},
+  {i:'MCT',n:'Muscat International',c:'Muscat',co:'Oman',cc:'OM'},
+  {i:'AMM',n:'Amman Queen Alia',c:'Amman',co:'Jordan',cc:'JO'},
+  {i:'TLV',n:'Tel Aviv Ben Gurion',c:'Tel Aviv',co:'Israel',cc:'IL'},
+  {i:'KWI',n:'Kuwait International',c:'Kuwait City',co:'Kuwait',cc:'KW'},
+  // Asia
+  {i:'BKK',n:'Bangkok Suvarnabhumi',c:'Bangkok',co:'Thailand',cc:'TH'},
+  {i:'DMK',n:'Bangkok Don Mueang',c:'Bangkok',co:'Thailand',cc:'TH'},
+  {i:'HKT',n:'Phuket International',c:'Phuket',co:'Thailand',cc:'TH'},
+  {i:'CNX',n:'Chiang Mai International',c:'Chiang Mai',co:'Thailand',cc:'TH'},
+  {i:'KBV',n:'Krabi Airport',c:'Krabi',co:'Thailand',cc:'TH'},
+  {i:'SIN',n:'Singapore Changi',c:'Singapore',co:'Singapore',cc:'SG'},
+  {i:'KUL',n:'Kuala Lumpur International',c:'Kuala Lumpur',co:'Malaysia',cc:'MY'},
+  {i:'HKG',n:'Hong Kong International',c:'Hong Kong',co:'Hong Kong',cc:'HK'},
+  {i:'NRT',n:'Tokyo Narita',c:'Tokyo',co:'Japan',cc:'JP'},
+  {i:'HND',n:'Tokyo Haneda',c:'Tokyo',co:'Japan',cc:'JP'},
+  {i:'KIX',n:'Osaka Kansai',c:'Osaka',co:'Japan',cc:'JP'},
+  {i:'ITM',n:'Osaka Itami',c:'Osaka',co:'Japan',cc:'JP'},
+  {i:'ICN',n:'Seoul Incheon',c:'Seoul',co:'South Korea',cc:'KR'},
+  {i:'PEK',n:'Beijing Capital',c:'Beijing',co:'China',cc:'CN'},
+  {i:'PVG',n:'Shanghai Pudong',c:'Shanghai',co:'China',cc:'CN'},
+  {i:'CAN',n:'Guangzhou Baiyun',c:'Guangzhou',co:'China',cc:'CN'},
+  {i:'DEL',n:'New Delhi Indira Gandhi',c:'New Delhi',co:'India',cc:'IN'},
+  {i:'BOM',n:'Mumbai Chhatrapati Shivaji',c:'Mumbai',co:'India',cc:'IN'},
+  {i:'BLR',n:'Bangalore Kempegowda',c:'Bangalore',co:'India',cc:'IN'},
+  {i:'MAA',n:'Chennai International',c:'Chennai',co:'India',cc:'IN'},
+  {i:'GOI',n:'Goa Dabolim',c:'Goa',co:'India',cc:'IN'},
+  {i:'CMB',n:'Colombo Bandaranaike',c:'Colombo',co:'Sri Lanka',cc:'LK'},
+  {i:'MLE',n:'Malé Velana International',c:'Malé',co:'Maldives',cc:'MV'},
+  {i:'KTM',n:'Kathmandu Tribhuvan',c:'Kathmandu',co:'Nepal',cc:'NP'},
+  {i:'SGN',n:'Ho Chi Minh City Tân Sơn Nhất',c:'Ho Chi Minh City',co:'Vietnam',cc:'VN'},
+  {i:'HAN',n:'Hanoi Nội Bài',c:'Hanoi',co:'Vietnam',cc:'VN'},
+  {i:'DAD',n:'Da Nang International',c:'Da Nang',co:'Vietnam',cc:'VN'},
+  {i:'MNL',n:'Manila Ninoy Aquino',c:'Manila',co:'Philippines',cc:'PH'},
+  {i:'CEB',n:'Cebu Mactan International',c:'Cebu',co:'Philippines',cc:'PH'},
+  {i:'DPS',n:'Bali Ngurah Rai',c:'Bali',co:'Indonesia',cc:'ID'},
+  {i:'CGK',n:'Jakarta Soekarno-Hatta',c:'Jakarta',co:'Indonesia',cc:'ID'},
+  {i:'LOP',n:'Lombok International',c:'Lombok',co:'Indonesia',cc:'ID'},
+  {i:'RGN',n:'Yangon International',c:'Yangon',co:'Myanmar',cc:'MM'},
+  {i:'REP',n:'Siem Reap Angkor',c:'Siem Reap',co:'Cambodia',cc:'KH'},
+  {i:'PNH',n:'Phnom Penh International',c:'Phnom Penh',co:'Cambodia',cc:'KH'},
+  // Africa
+  {i:'JNB',n:'Johannesburg OR Tambo',c:'Johannesburg',co:'South Africa',cc:'ZA'},
+  {i:'CPT',n:'Cape Town International',c:'Cape Town',co:'South Africa',cc:'ZA'},
+  {i:'DUR',n:'Durban King Shaka',c:'Durban',co:'South Africa',cc:'ZA'},
+  {i:'NBO',n:'Nairobi Jomo Kenyatta',c:'Nairobi',co:'Kenya',cc:'KE'},
+  {i:'MBA',n:'Mombasa Moi International',c:'Mombasa',co:'Kenya',cc:'KE'},
+  {i:'DAR',n:'Dar es Salaam Julius Nyerere',c:'Dar es Salaam',co:'Tanzania',cc:'TZ'},
+  {i:'JRO',n:'Kilimanjaro International',c:'Kilimanjaro',co:'Tanzania',cc:'TZ'},
+  {i:'ZNZ',n:'Zanzibar Abeid Amani Karume',c:'Zanzibar',co:'Tanzania',cc:'TZ'},
+  {i:'ADD',n:'Addis Ababa Bole',c:'Addis Ababa',co:'Ethiopia',cc:'ET'},
+  {i:'LOS',n:'Lagos Murtala Muhammed',c:'Lagos',co:'Nigeria',cc:'NG'},
+  {i:'ACC',n:'Accra Kotoka',c:'Accra',co:'Ghana',cc:'GH'},
+  {i:'CMN',n:'Casablanca Mohammed V',c:'Casablanca',co:'Morocco',cc:'MA'},
+  {i:'RAK',n:'Marrakech Menara',c:'Marrakech',co:'Morocco',cc:'MA'},
+  {i:'AGA',n:'Agadir Al Massira',c:'Agadir',co:'Morocco',cc:'MA'},
+  {i:'CAI',n:'Cairo International',c:'Cairo',co:'Egypt',cc:'EG'},
+  {i:'HRG',n:'Hurghada International',c:'Hurghada',co:'Egypt',cc:'EG'},
+  {i:'SSH',n:'Sharm el-Sheikh',c:'Sharm el-Sheikh',co:'Egypt',cc:'EG'},
+  {i:'TUN',n:'Tunis-Carthage',c:'Tunis',co:'Tunisia',cc:'TN'},
+  {i:'KGL',n:'Kigali International',c:'Kigali',co:'Rwanda',cc:'RW'},
+  {i:'EBB',n:'Entebbe International',c:'Entebbe',co:'Uganda',cc:'UG'},
+  {i:'DKR',n:'Dakar Léopold Sédar Senghor',c:'Dakar',co:'Senegal',cc:'SN'},
+  // Oceania
+  {i:'SYD',n:'Sydney Kingsford Smith',c:'Sydney',co:'Australia',cc:'AU'},
+  {i:'MEL',n:'Melbourne Tullamarine',c:'Melbourne',co:'Australia',cc:'AU'},
+  {i:'BNE',n:'Brisbane International',c:'Brisbane',co:'Australia',cc:'AU'},
+  {i:'PER',n:'Perth International',c:'Perth',co:'Australia',cc:'AU'},
+  {i:'ADL',n:'Adelaide International',c:'Adelaide',co:'Australia',cc:'AU'},
+  {i:'OOL',n:'Gold Coast Airport',c:'Gold Coast',co:'Australia',cc:'AU'},
+  {i:'AKL',n:'Auckland Airport',c:'Auckland',co:'New Zealand',cc:'NZ'},
+  {i:'CHC',n:'Christchurch Airport',c:'Christchurch',co:'New Zealand',cc:'NZ'},
+  {i:'WLG',n:'Wellington Airport',c:'Wellington',co:'New Zealand',cc:'NZ'},
+  {i:'NAN',n:'Nadi International',c:'Nadi',co:'Fiji',cc:'FJ'},
+];
+
+// Build country → airports map
+const BY_COUNTRY = {};
+AP.forEach(a => {
+  if (!BY_COUNTRY[a.cc]) BY_COUNTRY[a.cc] = [];
+  BY_COUNTRY[a.cc].push(a);
+});
+
+// ── STATE ──────────────────────────────────────────────────────────────────
+const S = { trip:'return', adults:1, children:0, infants:0 };
+
+// ── TRIP TYPE ──────────────────────────────────────────────────────────────
+function setTrip(type, btn) {
+  S.trip = type;
+  document.querySelectorAll('.trip-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const row = document.getElementById('dateRow');
+  const ret = document.getElementById('returnWrap');
+  if (type === 'oneway') { row.classList.add('oneway'); ret.style.display = 'none'; }
+  else { row.classList.remove('oneway'); ret.style.display = ''; }
+}
+
+// ── AUTOCOMPLETE ──────────────────────────────────────────────────────────
+function showAC(input, listId) {
+  const q = input.value.trim().toLowerCase();
+  const list = document.getElementById(listId);
+  if (q.length < 1) { list.classList.add('hidden'); return; }
+
+  const matches = AP.filter(a =>
+    a.i.toLowerCase().startsWith(q) ||
+    a.n.toLowerCase().includes(q) ||
+    a.c.toLowerCase().includes(q) ||
+    a.co.toLowerCase().includes(q)
+  ).slice(0, 8);
+
+  if (!matches.length) { list.classList.add('hidden'); return; }
+
+  list.innerHTML = matches.map(a =>
+    `<li class="ac-item" onmousedown="pickAirport(event,'${listId}','${a.i}','${a.n.replace(/'/g,"\\'")}','${a.c.replace(/'/g,"\\'")}','${a.co.replace(/'/g,"\\'")}','${a.cc}')">
+      <span class="ac-code">${a.i}</span>
+      <div><div class="ac-name">${a.n}</div><div class="ac-sub">${a.c} · ${a.co}</div></div>
+    </li>`
+  ).join('');
+  list.classList.remove('hidden');
+}
+
+function pickAirport(e, listId, iata, name, city, country, cc) {
+  e.preventDefault();
+  const isOrigin = listId === 'originList';
+  const inputId = isOrigin ? 'originInput' : 'destInput';
+  const codeId  = isOrigin ? 'originCode'  : 'destCode';
+
+  document.getElementById(inputId).value = `${name} (${iata})`;
+  document.getElementById(codeId).value  = iata;
+  document.getElementById(listId).classList.add('hidden');
+
+  if (!isOrigin) {
+    document.getElementById('destName').textContent = country;
+    document.getElementById('infoSection').classList.add('visible');
+  }
+}
+
+function hideAC(listId) {
+  setTimeout(() => document.getElementById(listId).classList.add('hidden'), 180);
+}
+
+// ── SWAP ──────────────────────────────────────────────────────────────────
+function doSwap() {
+  const oI = document.getElementById('originInput');
+  const dI = document.getElementById('destInput');
+  const oC = document.getElementById('originCode');
+  const dC = document.getElementById('destCode');
+  [oI.value, dI.value] = [dI.value, oI.value];
+  [oC.value, dC.value] = [dC.value, oC.value];
+}
+
+// ── PASSENGERS ────────────────────────────────────────────────────────────
+function togglePax(e) { e.stopPropagation(); document.getElementById('paxPopup').classList.toggle('open'); }
+function closePax() { document.getElementById('paxPopup').classList.remove('open'); }
+document.addEventListener('click', () => closePax());
+
+function adj(type, d) {
+  const min = type === 'adults' ? 1 : 0;
+  const max = type === 'adults' ? 9 : type === 'infants' ? 4 : 8;
+  S[type] = Math.min(max, Math.max(min, S[type] + d));
+  if (S.infants > S.adults) S.infants = S.adults;
+  renderPax();
+}
+
+function renderPax() {
+  document.getElementById('adultsN').textContent   = S.adults;
+  document.getElementById('childrenN').textContent = S.children;
+  document.getElementById('infantsN').textContent  = S.infants;
+  document.getElementById('adultsDn').disabled  = S.adults <= 1;
+  document.getElementById('childDn').disabled   = S.children <= 0;
+  document.getElementById('infantDn').disabled  = S.infants <= 0;
+
+  const parts = [`${S.adults} adult${S.adults > 1 ? 's' : ''}`];
+  if (S.children) parts.push(`${S.children} child${S.children > 1 ? 'ren' : ''}`);
+  if (S.infants)  parts.push(`${S.infants} infant${S.infants > 1 ? 's' : ''}`);
+  document.getElementById('paxLabel').textContent = parts.join(', ');
+}
+
+// ── URL BUILDERS ──────────────────────────────────────────────────────────
+function skyDate(d) { return d ? d.slice(2).replace(/-/g,'') : ''; }
+
+function extractCode(text) {
+  const m = text.match(/\(([A-Z]{3})\)$/);
+  return m ? m[1] : text.replace(/\s+/g,'').slice(0,4).toUpperCase();
+}
+
+function googleUrl(from, to, out, ret) {
+  let q = `Flights from ${from} to ${to} on ${out}`;
+  if (S.trip === 'return' && ret) q += ` returning ${ret}`;
+  return `https://www.google.com/travel/flights?q=${encodeURIComponent(q)}`;
+}
+
+function skyUrl(fromCode, toCode, out, ret, cabin) {
+  const o = fromCode || 'anywhere';
+  const d = toCode   || 'anywhere';
+  let url = `https://www.skyscanner.net/transport/flights/${o}/${d}/${skyDate(out)}/`;
+  if (S.trip === 'return' && ret) url += `${skyDate(ret)}/`;
+  url += `?adults=${S.adults}`;
+  if (S.children) url += `&children=${S.children}`;
+  if (S.infants)  url += `&infants=${S.infants}`;
+  url += `&cabinclass=${cabin}&ref=YOUR_SKYSCANNER_ID`;
+  return url;
+}
+
+// ── SEARCH ────────────────────────────────────────────────────────────────
+function doSearch() {
+  const fromText = document.getElementById('originInput').value.trim();
+  const toText   = document.getElementById('destInput').value.trim();
+  const out      = document.getElementById('outbound').value;
+  const ret      = document.getElementById('returnDate').value;
+  const cabin    = document.getElementById('cabin').value;
+  const errEl    = document.getElementById('formErr');
+
+  if (!fromText)                              return showErr('Please enter where you\'re flying from.');
+  if (!toText)                                return showErr('Please enter your destination.');
+  if (!out)                                   return showErr('Please pick an outbound date.');
+  if (S.trip === 'return' && !ret)            return showErr('Please pick a return date, or switch to one-way.');
+  if (S.trip === 'return' && ret < out)       return showErr('Return date must be after outbound date.');
+  errEl.style.display = 'none';
+
+  const fromCode = document.getElementById('originCode').value || extractCode(fromText);
+  const toCode   = document.getElementById('destCode').value   || extractCode(toText);
+
+  document.getElementById('googleLink').href = googleUrl(fromText, toText, out, ret);
+  document.getElementById('skyLink').href    = skyUrl(fromCode, toCode, out, ret, cabin);
+  document.getElementById('bookingPanel').classList.add('visible');
+
+  // Multi-airport: detect if origin is a whole country
+  const countryAPs = getCountryAPs(fromText, fromCode);
+  if (countryAPs && countryAPs.length > 1) {
+    buildMulti(countryAPs, toCode, out, ret, cabin);
+  } else {
+    document.getElementById('multiPanel').classList.remove('visible');
+  }
+
+  // Show info panels
+  if (toText) {
+    const destCountry = document.getElementById('destName').textContent;
+    if (!destCountry || destCountry === 'your destination') {
+      document.getElementById('destName').textContent = toText;
+    }
+    document.getElementById('infoSection').classList.add('visible');
+  }
+
+  document.getElementById('bookingPanel').scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+function showErr(msg) {
+  const el = document.getElementById('formErr');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+// ── MULTI-AIRPORT ─────────────────────────────────────────────────────────
+function getCountryAPs(text, code) {
+  // Check if the entered text matches a country name
+  const t = text.toLowerCase().replace(/ \([a-z]+\)$/i,'').trim();
+  const match = AP.find(a => a.co.toLowerCase() === t || a.c.toLowerCase() === t);
+  if (match) return BY_COUNTRY[match.cc] || null;
+  // Or if only one result exists and it's a city with multiple airports
+  return null;
+}
+
+function buildMulti(airports, toCode, out, ret, cabin) {
+  const limited = airports.slice(0, 100);
+  document.getElementById('multiLabel').textContent =
+    `Search from each ${airports[0].co} airport on Skyscanner`;
+
+  document.getElementById('multiGrid').innerHTML = limited.map(a => {
+    const url = skyUrl(a.i, toCode, out, ret, cabin);
+    return `<a href="${url}" target="_blank" rel="noopener" class="multi-link">
+      <span>${a.c}</span><span class="multi-iata">${a.i}</span>
+    </a>`;
+  }).join('');
+
+  document.getElementById('multiPanel').classList.add('visible');
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('outbound').min = today;
+document.getElementById('returnDate').min = today;
+renderPax();
+</script>
+</body>
+</html>
